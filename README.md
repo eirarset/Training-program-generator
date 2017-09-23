@@ -1,7 +1,7 @@
 # Training-program-generator
 ### [About](https://github.com/eirarset/Training-program-generator#about-1)
 ### [Screenshots](https://github.com/eirarset/Training-program-generator#screenshots-1)
-### [UML](https://github.com/eirarset/Training-program-generator#UML-1)
+### [UML](https://github.com/eirarset/Training-program-generator#uml-1)
 
 ## About
 A Training program generator, that progresses by increasing the weight by 2 % each session, and decreasing total volume.
