@@ -15,17 +15,16 @@ public class Progresjon {
 		int startSett = 3;
 		int startReps = 8;
 		for(int j = 0; j < uker; j++){
-			for(int i = 1; i <= 7; i+= 4, tempVekt += tempVekt/100*2){
+			for(int i = 0; i< 5; i+= 2){
 				oekter.add(new Oekt(j*7+i, startSett, startReps, tempVekt, oevelsesNavn));
 			}
-			startReps--;
+
+			if( j%2 == 0){
+				startReps--;
+			}
 			if(j > 0 &&j%3 == 0){
 				startSett++;;
 			}
-		}
-		
+		}	
 	}
-	
-	
-
 }

@@ -16,7 +16,7 @@ public class Program {
 	}
 	
 	void leggTilOevelse(String navn, double vekt){
-		oevelser.add(new Oevelse(navn, vekt));
+		oevelser.add(new Oevelse(navn, vekt, nUker));
 	}
 	
 	void leggTilUker(){
@@ -25,7 +25,7 @@ public class Program {
 		}
 		
 		for(Oevelse ov: oevelser){
-			for(Oekt oekt : ov.prog.oekter){
+			for(Oekt oekt : ov.progresjon.oekter){
 				uker[oekt.dag/7].leggTilOekt(oekt);
 			}
 		}

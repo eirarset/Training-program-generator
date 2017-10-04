@@ -2,12 +2,12 @@
 public class Oevelse {
 	String navn;
 	double startVekt;
-	Progresjon prog;
+	Progresjon progresjon;
 	
-	Oevelse(String n, double s){
+	Oevelse(String n, double s, int uker){
 		navn = n;
 		startVekt = s;
-		prog = new Progresjon(startVekt, 6, navn);; //TODO: Endre uker til et ikke "magisk" tall
+		progresjon = new Progresjon(startVekt, uker, navn);; //TODO: Endre uker til et ikke "magisk" tall
 	}
 	
 }

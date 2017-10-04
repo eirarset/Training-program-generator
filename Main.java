@@ -1,9 +1,12 @@
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 public class Main {
@@ -140,7 +143,7 @@ public class Main {
 	}
 	
 	void opprettProgram(){
-		program = new Program(6); //TODO: Endre uker til inputbasert
+		program = new Program(9); //TODO: Endre uker til inputbasert
 		toemFrame();
 		
 		for(int i = 0; i < oevelserSatt.length; i++){
@@ -149,24 +152,51 @@ public class Main {
 			}
 		}
 		program.leggTilUker();
-		System.out.println("Program generert");
 		
 		JFrame pFrame = new JFrame("Program");
 		pFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pFrame.setSize(1200, 800);
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		panel.setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
-		JTextArea[] fields = new JTextArea[program.nUker];
 		
-		for(int i = 0; i < fields.length; i++){
-			fields[i] = new JTextArea("Uke " + (i+1) + System.getProperty("line.separator") + program.uker[i]);
-			fields[i].setEditable(false);
-			panel.add(fields[i]);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
+		JScrollPane scrollpane = new JScrollPane(mainPanel);
+		
+		JPanel panelUkedager = new JPanel();
+		panelUkedager.setLayout(new BoxLayout(panelUkedager, BoxLayout.X_AXIS));
+		JLabel[] labelDager = new JLabel[3];
+		
+		labelDager[0] = new JLabel("Mandag");
+		labelDager[1] = new JLabel("Onsdag");
+		labelDager[2] = new JLabel("Fredag");
+		
+		for(int i = 0 ; i < labelDager.length; i++){
+			labelDager[i].setFont(new Font("Serif", Font.BOLD, 28));
+			labelDager[i].setBorder(BorderFactory.createEmptyBorder(10, 70, 5, 110));
+			panelUkedager.add(labelDager[i]);
+		}
+		mainPanel.add(panelUkedager);
+		
+		for(int i = 0; i < program.nUker; i++){
+			JPanel ukePanel = new JPanel();
+			ukePanel.setLayout(new BoxLayout(ukePanel, BoxLayout.X_AXIS));
+			JLabel ukeLabel = new JLabel("Uke " + i);
+			ukeLabel.setFont(new Font("Serif", Font.BOLD, 28));
+			ukeLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0 ,10));
+			ukePanel.add(ukeLabel);
+			for(int j = 0; j < program.uker[j].dager.size();j++){
+				JTextArea dagArea = new JTextArea(program.uker[i].dager.get(j).toString());
+				dagArea.setEditable(false);
+				Border marg = BorderFactory.createLineBorder(Color.BLACK);
+				dagArea.setBorder(BorderFactory.createCompoundBorder(marg, BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+				ukePanel.add(dagArea);
+			}
+			mainPanel.add(ukePanel);
 		}
 		
-		pFrame.add(panel);
-		pFrame.pack();
+		pFrame.add(scrollpane);
+		//pFrame.pack();
 		pFrame.setVisible(true);
 		
 	}
